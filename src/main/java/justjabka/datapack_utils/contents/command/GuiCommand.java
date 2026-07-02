@@ -113,7 +113,7 @@ public class GuiCommand {
 
         player.openMenu(menuProvider);
 
-        source.sendSuccess(() -> Component.literal("Successfully opened menu for %s".formatted(player.getName().getString())), true);
+        source.sendSuccess(() -> Component.literal("Successfully opened menu for %s".formatted(player.getDisplayName().getString())), true);
         return Command.SINGLE_SUCCESS;
     }
 }

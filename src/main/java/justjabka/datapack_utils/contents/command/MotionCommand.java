@@ -47,7 +47,7 @@ public class MotionCommand {
         }
         entity.hurtMarked = true;
 
-        context.getSource().sendSuccess(() -> Component.literal("Successfully applied motion for %s".formatted(entity.getName().getString())), true);
+        context.getSource().sendSuccess(() -> Component.literal("Successfully applied motion for %s".formatted(entity.getDisplayName().getString())), true);
         return Command.SINGLE_SUCCESS;
     }
 
