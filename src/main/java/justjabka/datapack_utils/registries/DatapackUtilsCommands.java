@@ -16,6 +16,7 @@ public class DatapackUtilsCommands {
     private static void registerCommands() {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             CommandNode<CommandSourceStack> executeNode = dispatcher.getRoot().getChild("execute");
+            CommandNode<CommandSourceStack> timeQueryNode = dispatcher.getRoot().getChild("time").getChild("query");
 
             dispatcher.register(MotionCommand.register());
             dispatcher.register(GuiCommand.register(registryAccess));
@@ -30,6 +31,11 @@ public class DatapackUtilsCommands {
             if (executeNode instanceof LiteralCommandNode<CommandSourceStack> vanillaExecute) {
                 LiteralCommandNode<CommandSourceStack> raycastNode = ExecuteRaycastCommand.register(vanillaExecute);
                 vanillaExecute.addChild(raycastNode);
+            }
+
+            if (timeQueryNode instanceof LiteralCommandNode<CommandSourceStack> vanillaTimeQuery) {
+                LiteralCommandNode<CommandSourceStack> realTimeNode = TimeQueryRealTimeCommand.register();
+                vanillaTimeQuery.addChild(realTimeNode);
             }
         });
     }
