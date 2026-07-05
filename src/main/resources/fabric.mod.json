@@ -3,15 +3,16 @@
 	"id": "just_utils",
 	"version": "${version}",
 	"name": "Just Utils",
-	"description": "",
+	"description": "Adds various utilities for datapacks, such as /gui, /motion, player data, and more",
 	"authors": [
 		"JustJabka"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://modrinth.com/mod/just-utils/",
+		"sources": "https://github.com/JustJabka/Just-Utils/",
+		"issues": "https://github.com/JustJabka/Just-Utils/issues"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/just_utils/icon.png",
 	"environment": "server",
 	"entrypoints": {
