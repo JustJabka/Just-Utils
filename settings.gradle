@@ -10,4 +10,4 @@ pluginManagement {
 }
 
 // Should match your modid
-rootProject.name = 'datapack_utils'
+rootProject.name = 'just_utils'

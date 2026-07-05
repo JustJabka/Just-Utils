@@ -1,4 +1,4 @@
-package justjabka.datapack_utils.contents.command;
+package justjabka.just_utils.contents.command;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.IntegerArgumentType;

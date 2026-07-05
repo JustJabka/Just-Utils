@@ -1,8 +1,8 @@
 {
 	"schemaVersion": 1,
-	"id": "datapack_utils",
+	"id": "just_utils",
 	"version": "${version}",
-	"name": "Datapack Utils",
+	"name": "Just Utils",
 	"description": "",
 	"authors": [
 		"JustJabka"
@@ -12,15 +12,15 @@
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/datapack_utils/icon.png",
+	"icon": "assets/just_utils/icon.png",
 	"environment": "server",
 	"entrypoints": {
 		"main": [
-			"justjabka.datapack_utils.DatapackUtils"
+			"justjabka.just_utils.JustUtils"
 		]
 	},
 	"mixins": [
-		"datapack_utils.mixins.json"
+		"just_utils.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.19.3",

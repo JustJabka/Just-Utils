@@ -1,6 +1,6 @@
-package justjabka.datapack_utils.mixins;
+package justjabka.just_utils.mixins;
 
-import justjabka.datapack_utils.contents.attachment.OpenedContainer;
+import justjabka.just_utils.contents.attachment.OpenedContainer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.ItemStackWithSlot;
 import net.minecraft.world.inventory.AbstractContainerMenu;

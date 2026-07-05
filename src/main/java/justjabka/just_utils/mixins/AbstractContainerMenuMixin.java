@@ -1,7 +1,7 @@
-package justjabka.datapack_utils.mixins;
+package justjabka.just_utils.mixins;
 
-import justjabka.datapack_utils.contents.attachment.OpenedContainer;
-import justjabka.datapack_utils.types.VirtualMenu;
+import justjabka.just_utils.contents.attachment.OpenedContainer;
+import justjabka.just_utils.types.VirtualMenu;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.ItemStackWithSlot;
 import net.minecraft.world.entity.player.Player;
@@ -20,22 +20,22 @@ import java.util.List;
 @Mixin(AbstractContainerMenu.class)
 public class AbstractContainerMenuMixin implements VirtualMenu {
     @Unique
-    private boolean datapack_utils$isVirtualMenu = false;
+    private boolean just_utils$isVirtualMenu = false;
 
     @Override
-    public void datapack_utils$setVirtual(boolean isVirtual) {
-        this.datapack_utils$isVirtualMenu = isVirtual;
+    public void just_utils$setVirtual(boolean isVirtual) {
+        this.just_utils$isVirtualMenu = isVirtual;
     }
 
     @Override
-    public boolean datapack_utils$isVirtual() {
-        return this.datapack_utils$isVirtualMenu;
+    public boolean just_utils$isVirtual() {
+        return this.just_utils$isVirtualMenu;
     }
 
     @Inject(method = "clicked", at = @At("TAIL"))
     private void onMenuUpdate(int slotIndex, int buttonNum, ContainerInput containerInput, Player player, CallbackInfo ci) {
         AbstractContainerMenu menu = (AbstractContainerMenu) (Object) this;
-        if (!((VirtualMenu) menu).datapack_utils$isVirtual()) return;
+        if (!((VirtualMenu) menu).just_utils$isVirtual()) return;
 
         if (!(player instanceof ServerPlayer serverPlayer)) return;
 

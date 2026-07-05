@@ -1,4 +1,4 @@
-package justjabka.datapack_utils.mixins;
+package justjabka.just_utils.mixins;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.nbt.CompoundTag;

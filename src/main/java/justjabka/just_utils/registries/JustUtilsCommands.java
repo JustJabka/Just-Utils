@@ -1,22 +1,23 @@
-package justjabka.datapack_utils.registries;
+package justjabka.just_utils.registries;
 
 import com.mojang.brigadier.tree.CommandNode;
 import com.mojang.brigadier.tree.LiteralCommandNode;
-import justjabka.datapack_utils.DatapackUtils;
-import justjabka.datapack_utils.contents.command.*;
-import justjabka.datapack_utils.contents.command.sub.RaycastSubCommand;
-import justjabka.datapack_utils.contents.command.sub.RealTimeSubCommand;
+import justjabka.just_utils.JustUtils;
+import justjabka.just_utils.contents.command.*;
+import justjabka.just_utils.contents.command.sub.RaycastSubCommand;
+import justjabka.just_utils.contents.command.sub.RealTimeSubCommand;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.commands.CommandSourceStack;
 
-public class DatapackUtilsCommands {
+public class JustUtilsCommands {
     public static void initialize() {
-        DatapackUtils.LOGGER.info("Initializing Commands");
         registerCommands();
         registerSubCommands();
     }
 
     private static void registerCommands() {
+        JustUtils.LOGGER.info("Initializing Commands");
+
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             dispatcher.register(MotionCommand.register());
             dispatcher.register(GuiCommand.register(registryAccess));
@@ -32,6 +33,8 @@ public class DatapackUtilsCommands {
     }
 
     private static void registerSubCommands() {
+        JustUtils.LOGGER.info("Initializing Sub-Commands");
+
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             CommandNode<CommandSourceStack> executeNode = dispatcher.getRoot().getChild("execute");
             CommandNode<CommandSourceStack> timeQueryNode = dispatcher.getRoot().getChild("time").getChild("query");

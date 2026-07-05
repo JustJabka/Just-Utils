@@ -1,4 +1,4 @@
-package justjabka.datapack_utils.mixins;
+package justjabka.just_utils.mixins;
 
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.PanicGoal;

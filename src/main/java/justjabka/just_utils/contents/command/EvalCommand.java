@@ -1,4 +1,4 @@
-package justjabka.datapack_utils.contents.command;
+package justjabka.just_utils.contents.command;
 
 import com.ezylang.evalex.EvaluationException;
 import com.ezylang.evalex.Expression;

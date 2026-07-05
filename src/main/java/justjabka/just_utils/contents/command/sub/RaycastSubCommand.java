@@ -1,4 +1,4 @@
-package justjabka.datapack_utils.contents.command.sub;
+package justjabka.just_utils.contents.command.sub;
 
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.DoubleArgumentType;

@@ -1,4 +1,4 @@
-package justjabka.datapack_utils.contents.command;
+package justjabka.just_utils.contents.command;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.BoolArgumentType;
@@ -6,7 +6,7 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
-import justjabka.datapack_utils.types.VirtualMenu;
+import justjabka.just_utils.types.VirtualMenu;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -110,7 +110,7 @@ public class GuiCommand {
         SimpleMenuProvider menuProvider = new SimpleMenuProvider(
                 (containerId, inventory, plr) -> {
                     AbstractContainerMenu createdMenu = menu.create(containerId, inventory);
-                    ((VirtualMenu) createdMenu).datapack_utils$setVirtual(true);
+                    ((VirtualMenu) createdMenu).just_utils$setVirtual(true);
 
                     return createdMenu;
                 },

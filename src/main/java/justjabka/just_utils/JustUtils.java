@@ -1,6 +1,6 @@
-package justjabka.datapack_utils;
+package justjabka.just_utils;
 
-import justjabka.datapack_utils.registries.DatapackUtilsCommands;
+import justjabka.just_utils.registries.JustUtilsCommands;
 import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.resources.Identifier;
@@ -8,13 +8,13 @@ import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DatapackUtils implements ModInitializer {
-	public static final String MOD_ID = "datapack_utils";
+public class JustUtils implements ModInitializer {
+	public static final String MOD_ID = "just_utils";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	@Override
 	public void onInitialize() {
-		DatapackUtilsCommands.initialize();
+		JustUtilsCommands.initialize();
 	}
 
 	public static Identifier id(String path) {

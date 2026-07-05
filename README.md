@@ -1,4 +1,4 @@
-# Datapack Utils
+# Just Utils
 
 ## Setup
 

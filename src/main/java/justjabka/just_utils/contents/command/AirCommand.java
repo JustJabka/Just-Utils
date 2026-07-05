@@ -1,11 +1,11 @@
-package justjabka.datapack_utils.contents.command;
+package justjabka.just_utils.contents.command;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import justjabka.datapack_utils.types.Operation;
+import justjabka.just_utils.types.Operation;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;

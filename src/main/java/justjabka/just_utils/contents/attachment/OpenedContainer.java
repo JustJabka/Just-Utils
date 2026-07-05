@@ -1,6 +1,6 @@
-package justjabka.datapack_utils.contents.attachment;
+package justjabka.just_utils.contents.attachment;
 
-import justjabka.datapack_utils.DatapackUtils;
+import justjabka.just_utils.JustUtils;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentSyncPredicate;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentTarget;
@@ -23,7 +23,7 @@ public class OpenedContainer {
     );
 
     private static final AttachmentType<List<ItemStackWithSlot>> ITEMS = AttachmentRegistry.create(
-            Identifier.fromNamespaceAndPath(DatapackUtils.MOD_ID, "items"),
+            Identifier.fromNamespaceAndPath(JustUtils.MOD_ID, "items"),
             builder -> builder
                     .initializer(ArrayList::new)
                     .persistent(ItemStackWithSlot.CODEC.listOf())

@@ -1,4 +1,4 @@
-package justjabka.datapack_utils.contents.command.sub;
+package justjabka.just_utils.contents.command.sub;
 
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import net.minecraft.commands.CommandSourceStack;
