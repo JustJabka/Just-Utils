@@ -6,6 +6,7 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
+import justjabka.datapack_utils.types.VirtualMenu;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -39,7 +40,7 @@ public class GuiCommand {
                                         .executes(context -> closeMenu(
                                                 context.getSource(),
                                                 EntityArgument.getPlayer(context, "target"),
-                                                getMenuType(context, "menu")
+                                                getMenuType(context)
                                         ))
                                 )
                         )
@@ -50,7 +51,7 @@ public class GuiCommand {
                                         .executes(context -> openMenu(
                                                 context.getSource(),
                                                 EntityArgument.getPlayer(context, "target"),
-                                                getMenuType(context, "menu"),
+                                                getMenuType(context),
                                                 Component.empty(),
                                                 false
                                         ))
@@ -58,7 +59,7 @@ public class GuiCommand {
                                                 .executes(context -> openMenu(
                                                         context.getSource(),
                                                         EntityArgument.getPlayer(context, "target"),
-                                                        getMenuType(context, "menu"),
+                                                        getMenuType(context),
                                                         ComponentArgument.getResolvedComponent(context, "name"),
                                                         false
                                                 ))
@@ -66,7 +67,7 @@ public class GuiCommand {
                                                         .executes(context -> openMenu(
                                                                 context.getSource(),
                                                                 EntityArgument.getPlayer(context, "target"),
-                                                                getMenuType(context, "menu"),
+                                                                getMenuType(context),
                                                                 ComponentArgument.getResolvedComponent(context, "name"),
                                                                 BoolArgumentType.getBool(context, "force")
                                                         ))
@@ -77,8 +78,8 @@ public class GuiCommand {
                 );
     }
 
-    private static MenuType<?> getMenuType(CommandContext<CommandSourceStack> context, String name) throws CommandSyntaxException {
-        return ResourceArgument.getResource(context, name, Registries.MENU).value();
+    private static MenuType<?> getMenuType(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        return ResourceArgument.getResource(context, "menu", Registries.MENU).value();
     }
 
     private static int closeMenu(final CommandSourceStack source, ServerPlayer player, @Nullable MenuType<?> menu) throws CommandSyntaxException {
@@ -107,7 +108,12 @@ public class GuiCommand {
         if (containerMenu != player.inventoryMenu && !force) throw ERROR_MENU_OPENED.create();
 
         SimpleMenuProvider menuProvider = new SimpleMenuProvider(
-                (containerId, inventory, plr) -> menu.create(containerId, inventory),
+                (containerId, inventory, plr) -> {
+                    AbstractContainerMenu createdMenu = menu.create(containerId, inventory);
+                    ((VirtualMenu) createdMenu).datapack_utils$setVirtual(true);
+
+                    return createdMenu;
+                },
                 name
         );
 

@@ -3,8 +3,10 @@
   "package": "justjabka.datapack_utils.mixins",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
+    "AbstractContainerMenuMixin",
     "EntityDataAccessorMixin",
-    "PanicGoalMixin"
+    "PanicGoalMixin",
+    "ServerPlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
