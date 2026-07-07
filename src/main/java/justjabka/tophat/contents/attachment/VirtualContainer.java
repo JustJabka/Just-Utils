@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OpenedContainer {
+public class VirtualContainer {
     public static final StreamCodec<RegistryFriendlyByteBuf, ItemStackWithSlot> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.INT, ItemStackWithSlot::slot,
             ItemStack.STREAM_CODEC, ItemStackWithSlot::stack,
@@ -22,7 +22,7 @@ public class OpenedContainer {
     );
 
     private static final AttachmentType<List<ItemStackWithSlot>> ITEMS = AttachmentRegistry.create(
-            Tophat.id("items"),
+            Tophat.id("virtual_items"),
             builder -> builder
                     .initializer(ArrayList::new)
                     .persistent(ItemStackWithSlot.CODEC.listOf())
@@ -30,11 +30,11 @@ public class OpenedContainer {
     );
 
 
-    public static OpenedContainerData get(AttachmentTarget target) {
-        return new OpenedContainerData(target);
+    public static VirtualContainerData get(AttachmentTarget target) {
+        return new VirtualContainerData(target);
     }
 
-    public record OpenedContainerData(AttachmentTarget target) {
+    public record VirtualContainerData(AttachmentTarget target) {
         public List<ItemStackWithSlot> get() {
             return this.target.getAttachedOrCreate(ITEMS);
         }
@@ -44,7 +44,7 @@ public class OpenedContainer {
         }
 
         public void clear() {
-            OpenedContainer.get(this.target).set(List.of());
+            VirtualContainer.get(this.target).set(List.of());
         }
     }
 }

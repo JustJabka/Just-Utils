@@ -6,6 +6,7 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
+import justjabka.tophat.contents.attachment.VirtualContainer;
 import justjabka.tophat.types.VirtualMenu;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
@@ -16,11 +17,19 @@ import net.minecraft.commands.arguments.ResourceArgument;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.ItemStackWithSlot;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerListener;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GuiCommand {
     private static final SimpleCommandExceptionType ERROR_NO_MENU_OPENED = new SimpleCommandExceptionType(Component.literal("Nothing changed. Target don't have opened menu"));
@@ -112,6 +121,20 @@ public class GuiCommand {
                     AbstractContainerMenu createdMenu = menu.create(containerId, inventory);
                     ((VirtualMenu) createdMenu).tophat$setVirtual(true);
 
+                    createdMenu.addSlotListener(new ContainerListener() {
+                        @Override
+                        public void slotChanged(@NonNull AbstractContainerMenu container, int slotIndex, @NonNull ItemStack itemStack) {
+                            if (!(plr instanceof ServerPlayer serverPlayer)) return;
+                            Slot slot = container.getSlot(slotIndex);
+
+                            if (slot.container == serverPlayer.getInventory()) return;
+                            updateAttachmentFromMenu(container, serverPlayer);
+                        }
+
+                        @Override
+                        public void dataChanged(@NonNull AbstractContainerMenu container, int id, int value) {}
+                    });
+
                     return createdMenu;
                 },
                 name
@@ -121,5 +144,21 @@ public class GuiCommand {
 
         source.sendSuccess(() -> Component.literal("Successfully opened menu for %s".formatted(player.getDisplayName().getString())), true);
         return Command.SINGLE_SUCCESS;
+    }
+
+    private static void updateAttachmentFromMenu(AbstractContainerMenu menu, ServerPlayer player) {
+        VirtualContainer.get(player).clear();
+
+        List<ItemStackWithSlot> currentItems = new ArrayList<>();
+
+        for (int i = 0; i < menu.slots.size(); i++) {
+            Slot slot = menu.getSlot(i);
+
+            if (slot.container == player.getInventory()) continue;
+            if (!slot.hasItem()) continue;
+            currentItems.add(new ItemStackWithSlot(i, slot.getItem().copy()));
+        }
+
+        VirtualContainer.get(player).set(currentItems);
     }
 }
